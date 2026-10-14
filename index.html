@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Roed Jay Romero provides e-commerce marketplace management, product listing support, customer service, order monitoring, and virtual assistance.">
+  <title>Roed Jay Romero | E-Commerce & Marketplace Virtual Assistant</title>
+  <style>
+    :root {
+      --navy: #12233f;
+      --navy-2: #1b3458;
+      --blue: #4c83d1;
+      --blue-light: #eaf2ff;
+      --ink: #172338;
+      --muted: #657188;
+      --paper: #ffffff;
+      --surface: #f4f7fb;
+      --line: #e1e7f0;
+      --radius: 20px;
+      --shadow: 0 18px 50px rgba(18,35,63,.10);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    body { margin: 0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: var(--ink); background: var(--paper); line-height: 1.6; }
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea, select { font: inherit; }
+    .container { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
+    .topbar { position: sticky; top: 0; z-index: 20; background: rgba(255,255,255,.94); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(225,231,240,.85); }
+    .nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 22px; }
+    .brand { display: flex; align-items: center; gap: 11px; font-weight: 800; letter-spacing: -.03em; color: var(--navy); }
+    .brand-mark { width: 42px; height: 42px; border-radius: 13px; display: block; overflow: hidden; border: 2px solid rgba(18,35,63,.08); box-shadow: 0 8px 20px rgba(18,35,63,.08); background: var(--navy); }
+    .brand-mark img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .brand-info { display: inline-flex; flex-direction: column; color: var(--navy); }
+    .brand-info small { display: block; font-size: 10px; color: var(--muted); font-weight: 700; letter-spacing: .14em; margin-top: -2px; }
+    .navlinks { display: flex; align-items: center; gap: 25px; font-size: 13px; font-weight: 650; color: #44516a; }
+    .navlinks a:hover { color: var(--blue); }
+    .nav-cta, .btn { display: inline-flex; align-items: center; justify-content: center; gap: 9px; border-radius: 999px; padding: 13px 19px; font-weight: 750; font-size: 14px; border: 1px solid transparent; transition: .2s ease; cursor: pointer; }
+    .nav-cta, .btn-primary { color: white; background: var(--blue); box-shadow: 0 8px 20px rgba(76,131,209,.22); }
+    .nav-cta:hover, .btn-primary:hover { background: #376fbe; transform: translateY(-1px); }
+    .btn-secondary { color: var(--navy); border-color: #cad5e5; background: white; }
+    .btn-secondary:hover { border-color: var(--blue); background: var(--blue-light); }
+    .menu-toggle { display: none; border: 1px solid var(--line); background: white; border-radius: 10px; padding: 9px 12px; color: var(--navy); }
+    .hero { overflow: hidden; position: relative; background: radial-gradient(circle at 90% 10%, rgba(76,131,209,.28), transparent 30%), linear-gradient(135deg, #101f38 0%, #18365d 62%, #21436e 100%); color: white; padding: 92px 0 88px; }
+    .hero:after { content: ""; position: absolute; width: 400px; height: 400px; border: 1px solid rgba(255,255,255,.10); border-radius: 50%; right: -140px; bottom: -240px; box-shadow: 0 0 0 45px rgba(255,255,255,.025), 0 0 0 90px rgba(255,255,255,.02); }
+    .hero-grid { display: grid; grid-template-columns: 1.08fr .92fr; gap: 55px; align-items: center; position: relative; z-index: 1; }
+    .eyebrow { text-transform: uppercase; font-size: 11px; letter-spacing: .18em; font-weight: 800; color: #9fc4ff; display: inline-flex; align-items: center; gap: 10px; }
+    .eyebrow:before { content: ""; width: 27px; height: 2px; background: var(--blue); }
+    h1 { font-size: clamp(42px, 5.5vw, 68px); line-height: 1.04; letter-spacing: -.055em; margin: 22px 0 22px; max-width: 700px; }
+    h1 span { color: #9fc4ff; }
+    .hero-copy { font-size: 17px; line-height: 1.8; color: #d6e1f0; max-width: 590px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+    .hero .btn-secondary { background: transparent; border-color: rgba(255,255,255,.30); color: white; }
+    .hero .btn-secondary:hover { background: rgba(255,255,255,.09); }
+    .hero-note { display: flex; align-items: center; gap: 10px; margin-top: 28px; color: #c1d1e7; font-size: 12px; }
+    .online-dot { width: 8px; height: 8px; background: #71d9b0; border-radius: 50%; box-shadow: 0 0 0 5px rgba(113,217,176,.12); }
+    .visual-card { background: rgba(255,255,255,.97); color: var(--ink); border-radius: 24px; padding: 24px; box-shadow: 0 25px 80px rgba(0,0,0,.25); transform: rotate(1.5deg); }
+    .visual-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding-bottom: 18px; border-bottom: 1px solid var(--line); }
+    .visual-head strong { font-size: 14px; color: var(--navy); }
+    .mini-label { background: #e9f8f1; color: #187653; font-size: 10px; font-weight: 800; padding: 6px 9px; border-radius: 999px; }
+    .dash-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin: 18px 0; }
+    .stat { background: var(--surface); padding: 13px 10px; border-radius: 13px; }
+    .stat b { display: block; font-size: 20px; color: var(--navy); letter-spacing: -.04em; }
+    .stat span { display: block; font-size: 10px; color: var(--muted); margin-top: 3px; }
+    .task-list { display: grid; gap: 10px; }
+    .task { display: flex; align-items: center; gap: 11px; border: 1px solid var(--line); border-radius: 12px; padding: 11px 12px; }
+    .task-icon { width: 34px; height: 34px; display: grid; place-items: center; background: var(--blue-light); color: var(--blue); border-radius: 10px; font-size: 16px; flex-shrink: 0; }
+    .task b { display: block; font-size: 12px; color: var(--navy); }
+    .task small { display: block; font-size: 10px; color: var(--muted); }
+    .section { padding: 86px 0; }
+    .section-soft { background: var(--surface); }
+    .section-head { max-width: 690px; margin-bottom: 38px; }
+    .kicker { color: var(--blue); text-transform: uppercase; letter-spacing: .16em; font-size: 11px; font-weight: 850; }
+    h2 { font-size: clamp(30px, 4vw, 44px); letter-spacing: -.045em; line-height: 1.12; color: var(--navy); margin: 12px 0 15px; }
+    .section-head p, .about-copy p { color: var(--muted); font-size: 15px; line-height: 1.85; margin: 0; }
+    .about-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 60px; align-items: start; }
+    .about-panel { background: var(--navy); color: white; padding: 28px; border-radius: var(--radius); min-height: 300px; position: relative; overflow: hidden; }
+    .about-panel:after { content: "RJ"; position: absolute; right: -6px; bottom: -58px; font-size: 190px; line-height: 1; font-weight: 900; color: rgba(255,255,255,.055); letter-spacing: -.1em; }
+    .about-photo { display: block; width: 100%; max-width: 260px; height: auto; border-radius: 18px; margin: 0 auto 18px; border: 2px solid rgba(255,255,255,.15); box-shadow: 0 18px 40px rgba(0,0,0,.15); position: relative; z-index: 1; }
+    .about-panel h3 { font-size: 23px; line-height: 1.2; margin: 0 0 12px; max-width: 230px; position: relative; z-index: 1; }
+    .about-panel p { color: #d3dfef; font-size: 13px; position: relative; z-index: 1; }
+    .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 23px; position: relative; z-index: 1; }
+    .pill { border: 1px solid rgba(255,255,255,.23); color: #e7effa; border-radius: 999px; padding: 7px 10px; font-size: 11px; }
+    .about-copy p + p { margin-top: 15px; }
+    .check-list { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 24px; }
+    .check { display: flex; gap: 9px; align-items: flex-start; color: var(--navy); font-size: 13px; font-weight: 650; }
+    .check span { color: var(--blue); font-weight: 900; }
+    .services-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 17px; }
+    .service-card { border: 1px solid var(--line); border-radius: 17px; padding: 24px; background: white; transition: .22s ease; }
+    .service-card:hover { transform: translateY(-4px); border-color: #c6d8f4; box-shadow: var(--shadow); }
+    .service-icon { width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; background: var(--blue-light); color: var(--blue); font-size: 21px; margin-bottom: 19px; }
+    .service-card h3 { font-size: 17px; letter-spacing: -.02em; color: var(--navy); margin: 0 0 10px; }
+    .service-card p { font-size: 13px; color: var(--muted); margin: 0 0 15px; line-height: 1.7; }
+    .service-card ul { margin: 0; padding-left: 18px; color: #47556c; font-size: 12px; line-height: 1.9; }
+    .portfolio-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 20px; }
+    .project { border: 1px solid var(--line); border-radius: 18px; overflow: hidden; background: white; }
+    .project-art { min-height: 195px; background: linear-gradient(135deg, #edf4ff 0%, #f9fbff 100%); padding: 16px; display: block; }
+    .project-photo { position: relative; width: 100%; height: 100%; min-height: 195px; border-radius: 16px; overflow: hidden; background: linear-gradient(135deg, #12233f, #2a4d7d); box-shadow: inset 0 0 0 1px rgba(255,255,255,.12); }
+    .project-photo:before { content: ""; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(76,131,209,.18), rgba(17,32,52,.1)); }
+    .project-photo img { display: block; width: 100%; height: 100%; min-height: 195px; object-fit: cover; filter: saturate(0.9) contrast(1.08) brightness(0.96); }
+    .project-photo:after { content: "Sample preview"; position: absolute; left: 14px; bottom: 14px; background: rgba(10,18,31,.72); color: white; border: 1px solid rgba(255,255,255,.12); border-radius: 999px; padding: 6px 10px; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; font-weight: 700; }
+    .project-ui { position: absolute; inset: 18px 18px 22px; display: grid; grid-template-rows: auto auto 1fr; gap: 12px; pointer-events: none; }
+    .project-ui-top { display: flex; gap: 8px; align-items: center; }
+    .project-ui-top span { display: block; width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,.7); }
+    .project-panel { background: rgba(255,255,255,.92); border: 1px solid rgba(255,255,255,.24); border-radius: 12px; box-shadow: 0 14px 26px rgba(14,25,43,.12); padding: 12px; }
+    .project-panel-header { height: 8px; width: 42%; border-radius: 999px; background: #2a4d7d; margin-bottom: 12px; }
+    .project-grid { display: grid; grid-template-columns: 1.3fr .9fr .7fr; gap: 8px; }
+    .project-grid span { display: block; height: 18px; border-radius: 8px; background: #edf3fb; }
+    .project-grid span:nth-child(2n) { background: #dfeafc; }
+    .project-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .project-metrics span { display: block; height: 30px; border-radius: 8px; background: linear-gradient(135deg, #dfeafe, #eff6ff); }
+    .mock-window { background: white; border: 1px solid #dce5f1; border-radius: 12px; width: 100%; max-width: 400px; overflow: hidden; box-shadow: 0 12px 30px rgba(18,35,63,.10); }
+    .mock-bar { background: #f8faff; border-bottom: 1px solid #e5ebf4; padding: 9px 12px; display: flex; gap: 5px; }
+    .mock-bar i { width: 6px; height: 6px; border-radius: 50%; background: #c7d4e7; }
+    .mock-content { padding: 13px; }
+    .mock-title { height: 8px; width: 42%; background: #233c60; border-radius: 4px; margin-bottom: 12px; }
+    .mock-row { display: grid; grid-template-columns: 1.3fr .8fr .6fr; gap: 8px; margin-bottom: 8px; }
+    .mock-row span { height: 22px; border-radius: 5px; background: #f0f4fa; }
+    .mock-row span:first-child { background: #e1ecfb; }
+    .project-body { padding: 23px; }
+    .project-type { color: var(--blue); font-size: 10px; font-weight: 850; letter-spacing: .13em; text-transform: uppercase; }
+    .project h3 { margin: 7px 0 8px; color: var(--navy); font-size: 19px; }
+    .project p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.75; }
+    .project-note { display: inline-block; margin-top: 14px; background: #fff7e7; color: #8b5c0c; border-radius: 7px; padding: 6px 8px; font-size: 10px; font-weight: 750; }
+    .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+    .skill-group h3 { color: var(--navy); font-size: 18px; margin: 0 0 17px; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 9px; }
+    .skill-tags span { padding: 9px 12px; border: 1px solid var(--line); border-radius: 10px; background: white; color: #3c4b63; font-size: 12px; font-weight: 650; }
+    .tool-category { margin-bottom: 18px; }
+    .tool-category:last-child { margin-bottom: 0; }
+    .tool-category h4 { margin: 0 0 10px; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--blue); }
+    .tool-note { font-size: 12px; color: var(--muted); margin-top: 14px; }
+    .process-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; }
+    .process-step { padding: 22px; border-left: 2px solid #c9dcf7; }
+    .process-step b { display: block; color: var(--blue); font-size: 12px; letter-spacing: .12em; }
+    .process-step h3 { color: var(--navy); font-size: 17px; margin: 8px 0; }
+    .process-step p { color: var(--muted); font-size: 13px; margin: 0; line-height: 1.75; }
+    .contact-wrap { display: grid; grid-template-columns: .9fr 1.1fr; gap: 40px; align-items: start; }
+    .contact-card { background: var(--navy); color: white; border-radius: var(--radius); padding: 30px; }
+    .contact-card h3 { font-size: 24px; line-height: 1.25; margin: 0 0 12px; }
+    .contact-card p { color: #d3dfef; font-size: 14px; }
+    .contact-detail { display: flex; gap: 12px; align-items: flex-start; margin-top: 23px; font-size: 13px; }
+    .contact-detail strong { display: block; color: white; }
+    .contact-detail span { color: #d3dfef; overflow-wrap: anywhere; }
+    .contact-form { border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; background: white; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    label { display: block; color: var(--navy); font-size: 12px; font-weight: 750; margin-bottom: 7px; }
+    .field { margin-bottom: 16px; }
+    input, textarea, select { width: 100%; padding: 12px 13px; border: 1px solid #d7e0ed; border-radius: 10px; background: #fbfcfe; color: var(--ink); outline: none; font-size: 13px; }
+    input:focus, textarea:focus, select:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(76,131,209,.12); }
+    textarea { min-height: 120px; resize: vertical; }
+    .form-help { color: var(--muted); font-size: 11px; margin: 12px 0 0; }
+    .footer { background: #0d1a2e; color: #d0d9e8; padding: 25px 0; font-size: 12px; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 18px; }
+    .footer strong { color: white; }
+    .footer-links { display: flex; gap: 16px; flex-wrap: wrap; }
+    .footer a:hover { color: white; }
+    .backtop { color: #9fc4ff; }
+    @media (max-width: 900px) {
+      .navlinks { gap: 14px; font-size: 12px; }
+      .nav-cta { display: none; }
+      .hero-grid { gap: 28px; }
+      .services-grid { grid-template-columns: repeat(2,1fr); }
+      .about-grid { gap: 32px; }
+    }
+    @media (max-width: 700px) {
+      .container { width: min(100% - 30px, 540px); }
+      .nav { min-height: 68px; }
+      .menu-toggle { display: inline-flex; }
+      .navlinks { display: none; position: absolute; top: 68px; left: 0; right: 0; padding: 16px 22px 20px; background: white; border-bottom: 1px solid var(--line); flex-direction: column; align-items: stretch; gap: 0; }
+      .navlinks.open { display: flex; }
+      .navlinks a { padding: 11px 0; }
+      .hero { padding: 62px 0 58px; }
+      .hero-grid, .about-grid, .skills-grid, .contact-wrap { grid-template-columns: 1fr; }
+      .hero-grid { gap: 38px; }
+      .visual-card { transform: none; padding: 17px; }
+      .section { padding: 62px 0; }
+      .services-grid, .portfolio-grid, .process-grid { grid-template-columns: 1fr; }
+      .check-list { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; gap: 0; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+      h1 { font-size: clamp(39px, 12vw, 55px); }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <div class="brand" aria-label="Roed Jay Romero home">
+        <a class="brand-mark" href="#home" aria-label="Go to home"><img src="profile-photo.png" alt="Roed Jay Romero logo"></a>
+        <a class="brand-info" href="#home" aria-label="Go to home"><span>ROED JAY ROMERO<small>E-COMMERCE & VIRTUAL SUPPORT</small></span></a>
+      </div>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open navigation" aria-expanded="false">☰ Menu</button>
+      <nav class="navlinks" id="navLinks" aria-label="Main navigation">
+        <a href="#about">About</a><a href="#services">Services</a><a href="#portfolio">Portfolio</a><a href="#skills">Skills</a><a href="#contact">Contact</a>
+      </nav>
+      <a class="nav-cta" href="#contact">Let's Talk <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">E-commerce · Marketplace · Virtual Assistance</div>
+          <h1>Your Online Business,<br><span>Managed Smarter.</span></h1>
+          <p class="hero-copy">I help e-commerce businesses keep marketplace operations organized, product listings accurate, and customer communication moving—so business owners can focus on growth.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#contact">Discuss Your Project <span aria-hidden="true">↗</span></a>
+            <a class="btn btn-secondary" href="#portfolio">Explore My Work <span aria-hidden="true">↓</span></a>
+          </div>
+          <div class="hero-note"><span class="online-dot"></span> Remote support for businesses in the USA, UK, and beyond</div>
+        </div>
+        <div class="visual-card" aria-label="Illustrative marketplace operations dashboard">
+          <div class="visual-head"><strong>Marketplace Operations Overview</strong><span class="mini-label">WORKFLOW SAMPLE</span></div>
+          <div class="dash-stats">
+            <div class="stat"><b>01</b><span>Product listings</span></div>
+            <div class="stat"><b>02</b><span>Customer support</span></div>
+            <div class="stat"><b>03</b><span>Order tracking</span></div>
+          </div>
+          <div class="task-list">
+            <div class="task"><div class="task-icon">▤</div><div><b>Product Listing Maintenance</b><small>Product details · images · pricing checks</small></div></div>
+            <div class="task"><div class="task-icon">✉</div><div><b>Customer Inquiry Follow-Up</b><small>Responses · status tracking · next steps</small></div></div>
+            <div class="task"><div class="task-icon">✓</div><div><b>Daily Operations Support</b><small>Order monitoring · organized records</small></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container about-grid">
+        <div class="about-panel">
+          <img class="about-photo" src="profile-photo.png" alt="Roed Jay Romero portrait">
+          <div class="eyebrow">A little about me</div>
+          <h3>Practical support. Organized workflows. Better customer experiences.</h3>
+          <p>I bring hands-on experience supporting marketplace and customer-facing operations.</p>
+          <div class="pill-row"><span class="pill">Amazon</span><span class="pill">Alibaba</span><span class="pill">Customer Support</span><span class="pill">Admin Support</span></div>
+        </div>
+        <div class="about-copy">
+          <div class="kicker">About Me</div>
+          <h2>Your dependable partner behind the scenes.</h2>
+          <p>Hello! I'm <strong>Roed Jay Romero</strong>, an E-Commerce & Marketplace Specialist and Virtual Assistant with experience in e-commerce operations, customer service, sales, marketing, and administrative support.</p>
+          <p>My work includes maintaining product listings, responding to marketplace inquiries, following up with potential buyers, monitoring orders and communications, and keeping product information accurate and up to date.</p>
+          <p>I value clear communication, attention to detail, and reliable follow-through. Whether you need ongoing support or help organizing a specific workflow, I aim to make your day-to-day operations easier to manage.</p>
+          <div class="check-list">
+            <div class="check"><span>✓</span> Organized and detail-oriented</div>
+            <div class="check"><span>✓</span> Customer-focused communication</div>
+            <div class="check"><span>✓</span> Marketplace operations support</div>
+            <div class="check"><span>✓</span> Flexible remote collaboration</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-soft" id="services">
+      <div class="container">
+        <div class="section-head">
+          <div class="kicker">How I can help</div>
+          <h2>Reliable support for the tasks that keep business moving.</h2>
+          <p>Flexible assistance for e-commerce teams, online sellers, and busy business owners who need help with daily operations.</p>
+        </div>
+        <div class="services-grid">
+          <article class="service-card"><div class="service-icon">▣</div><h3>Marketplace Management</h3><p>Keep marketplace information organized and up to date.</p><ul><li>Amazon and Alibaba assistance</li><li>Product listing uploads and updates</li><li>Marketplace inquiry monitoring</li><li>Product data accuracy checks</li></ul></article>
+          <article class="service-card"><div class="service-icon">✎</div><h3>Product Listing Support</h3><p>Maintain clear, consistent product information across catalogs.</p><ul><li>Titles and descriptions</li><li>Specifications and pricing updates</li><li>Product catalog organization</li><li>Listing quality checks</li></ul></article>
+          <article class="service-card"><div class="service-icon">☏</div><h3>Customer Support</h3><p>Help customers get timely, professional responses.</p><ul><li>Marketplace messages and email</li><li>Product questions</li><li>Order-related communication</li><li>Customer follow-ups</li></ul></article>
+          <article class="service-card"><div class="service-icon">▤</div><h3>Order & Operations Support</h3><p>Track pending tasks and keep operational records tidy.</p><ul><li>Order status monitoring</li><li>Inquiry and task trackers</li><li>Daily operations updates</li><li>Communication coordination</li></ul></article>
+          <article class="service-card"><div class="service-icon">⌘</div><h3>General Virtual Assistance</h3><p>Get help with recurring administrative tasks.</p><ul><li>Data entry and spreadsheets</li><li>Email and inbox organization</li><li>Document preparation</li><li>Online research</li></ul></article>
+          <article class="service-card"><div class="service-icon">↗</div><h3>Sales & Lead Follow-Up</h3><p>Support a consistent and organized customer pipeline.</p><ul><li>Lead list organization</li><li>Follow-up tracking</li><li>Product inquiry coordination</li><li>Customer relationship support</li></ul></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="portfolio">
+      <div class="container">
+        <div class="section-head">
+          <div class="kicker">Portfolio samples</div>
+          <h2>A look at how I organize the work.</h2>
+          <p>These are illustrative sample projects designed to demonstrate the type of deliverables I can prepare. They are not client case studies or claims of measured results.</p>
+        </div>
+        <div class="portfolio-grid">
+          <article class="project">
+            <div class="project-art">
+              <div class="project-photo">
+                <div class="project-ui">
+                  <div class="project-ui-top"><span></span><span></span><span></span></div>
+                  <div class="project-panel">
+                    <div class="project-panel-header"></div>
+                    <div class="project-grid"><span></span><span></span><span></span></div>
+                    <div style="height:10px"></div>
+                    <div class="project-metrics"><span></span><span></span><span></span></div>
+                  </div>
+                </div>
+                <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=900&q=80" alt="Spreadsheet-based product listing tracker preview">
+              </div>
+            </div>
+            <div class="project-body"><div class="project-type">Sample project 01</div><h3>Product Listing Tracker</h3><p>A sample product catalog tracker for SKUs, product titles, categories, pricing, listing status, and update checks.</p><ul><li><strong>Catalog A:</strong> Amazon & Alibaba product list in Google Sheets / Excel with columns for SKU, title, category, price, stock, listing status, and last update.</li><li><strong>Catalog B:</strong> Marketplace task tracker in ClickUp / Trello / Asana with task owner, due date, priority, notes, and completion status.</li><li><strong>Catalog C:</strong> Content & asset tracker using Canva, Google Drive, and Gmail to organize product images, listings, and marketing notes.</li></ul><span class="project-note">Illustrative project · Fictional data · Google Sheets, Excel, ClickUp, Canva</span><span class="project-note" style="margin-top:8px; background:#eaf8f1; color:#1b6d4d;">Sample finished project layout</span></div>
+          </article>
+          <article class="project">
+            <div class="project-art">
+              <div class="project-photo">
+                <div class="project-ui">
+                  <div class="project-ui-top"><span></span><span></span><span></span></div>
+                  <div class="project-panel">
+                    <div class="project-panel-header" style="width:55%"></div>
+                    <div class="project-grid"><span></span><span></span><span></span></div>
+                    <div style="height:10px"></div>
+                    <div class="project-metrics"><span style="background:linear-gradient(135deg,#daeaff,#eef5ff)"></span><span style="background:linear-gradient(135deg,#dff2eb,#effaf6)"></span><span style="background:linear-gradient(135deg,#fff0d9,#fff8ea)"></span></div>
+                  </div>
+                </div>
+                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80" alt="Customer support and inquiry tracking preview">
+              </div>
+            </div>
+            <div class="project-body"><div class="project-type">Sample project 02</div><h3>Customer Inquiry Tracker</h3><p>A simple workflow for recording customer questions, priority, response status, assigned actions, and follow-up dates.</p><ul><li><strong>Catalog A:</strong> Zendesk / Gmail / Outlook inbox tracker with customer name, issue type, source channel, urgency, response due date, and resolution notes.</li><li><strong>Catalog B:</strong> Salesforce / ATS follow-up log for conversations, sales leads, account notes, owner, and next step.</li><li><strong>Catalog C:</strong> Team coordination sheet in Google Sheets / Excel tracking messages, tasks, updates, and follow-ups across Slack, Zoom, and Google Meet.</li></ul><span class="project-note">Illustrative project · Fictional data · Zendesk, Gmail, Salesforce, Slack, Google Sheets</span><span class="project-note" style="margin-top:8px; background:#eaf8f1; color:#1b6d4d;">Sample finished project layout</span></div>
+          </article>
+          <article class="project">
+            <div class="project-art">
+              <div class="project-photo">
+                <div class="project-ui">
+                  <div class="project-ui-top"><span></span><span></span><span></span></div>
+                  <div class="project-panel">
+                    <div class="project-panel-header" style="width:48%"></div>
+                    <div class="project-grid"><span></span><span></span><span></span></div>
+                    <div style="height:10px"></div>
+                    <div class="project-metrics"><span></span><span></span><span></span></div>
+                  </div>
+                </div>
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=900&q=80" alt="Order monitoring dashboard preview">
+              </div>
+            </div>
+            <div class="project-body"><div class="project-type">Sample project 03</div><h3>Order Monitoring Dashboard</h3><p>A mock order log to organize order references, status, delivery updates, and pending customer communications.</p><ul><li><strong>Catalog A:</strong> Amazon / Alibaba order tracker in Google Sheets or Excel with order ID, product, customer, shipping status, payment status, and notes.</li><li><strong>Catalog B:</strong> Project board in ClickUp / Trello / Asana for fulfillment tasks, review dates, escalations, and team reminders.</li><li><strong>Catalog C:</strong> Communication log in Gmail / Outlook / Slack for customer updates, order follow-ups, and internal coordination.</li></ul><span class="project-note">Illustrative project · Fictional data · Amazon, Alibaba, Excel, ClickUp, Gmail</span><span class="project-note" style="margin-top:8px; background:#eaf8f1; color:#1b6d4d;">Sample finished project layout</span></div>
+          </article>
+          <article class="project">
+            <div class="project-art">
+              <div class="project-photo">
+                <div class="project-ui">
+                  <div class="project-ui-top"><span></span><span></span><span></span></div>
+                  <div class="project-panel">
+                    <div class="project-panel-header" style="width:62%"></div>
+                    <div class="project-grid"><span></span><span></span><span></span></div>
+                    <div style="height:10px"></div>
+                    <div class="project-metrics"><span style="background:linear-gradient(135deg,#dfeafe,#eef6ff)"></span><span style="background:linear-gradient(135deg,#dff5ea,#eefaf5)"></span><span style="background:linear-gradient(135deg,#fceccf,#fff8eb)"></span></div>
+                  </div>
+                </div>
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80" alt="Marketplace quality checklist and product review preview">
+              </div>
+            </div>
+            <div class="project-body"><div class="project-type">Sample project 04</div><h3>Marketplace Quality Checklist</h3><p>A reusable checklist for reviewing product details, image availability, pricing, and listing completeness before updates.</p><ul><li><strong>Catalog A:</strong> Product quality checklist in Google Sheets / Excel covering title accuracy, keywords, pricing, stock status, images, and category mapping.</li><li><strong>Catalog B:</strong> Content review tracker using Canva, Google Drive, and Google Docs to confirm listing assets, descriptions, and proof of updates.</li><li><strong>Catalog C:</strong> Marketplace monitoring sheet in Asana / ClickUp / Trello to flag issues, assign fixes, and track completion across channels like Amazon, Facebook, Instagram, TikTok, and LinkedIn.</li></ul><span class="project-note">Illustrative project · Fictional data · Canva, Google Drive, Excel, Asana, Shopify-style marketplace checks</span><span class="project-note" style="margin-top:8px; background:#eaf8f1; color:#1b6d4d;">Sample finished project layout</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-soft" id="skills">
+      <div class="container">
+        <div class="section-head">
+          <div class="kicker">Skills & tools</div>
+          <h2>Practical skills. Clear communication. Organized execution.</h2>
+          <p>I focus on dependable support and structured workflows, using the platforms and tools required by each client.</p>
+        </div>
+        <div class="skills-grid">
+          <div class="skill-group">
+            <h3>Core Skills</h3>
+            <div class="tool-category">
+              <h4>E-Commerce & Operations</h4>
+              <div class="skill-tags"><span>Marketplace Operations</span><span>Product Listing Management</span><span>Order Monitoring</span><span>Inventory Support</span><span>Customer Needs Assessment</span><span>Multichannel Support</span></div>
+            </div>
+            <div class="tool-category">
+              <h4>Sales & Support</h4>
+              <div class="skill-tags"><span>Customer Service</span><span>Lead Follow-Up</span><span>Sales Support</span><span>Lead Generation</span><span>Upselling</span><span>Cross-Selling</span></div>
+            </div>
+            <div class="tool-category">
+              <h4>Administrative & Communication</h4>
+              <div class="skill-tags"><span>Administrative Support</span><span>Calendar Management</span><span>Inbox Organization</span><span>Documentation & Reporting</span><span>Written Communication</span><span>Document Preparation</span></div>
+            </div>
+            <div class="tool-category">
+              <h4>Data & Project Work</h4>
+              <div class="skill-tags"><span>Data Entry</span><span>Spreadsheet Management</span><span>Project Coordination</span><span>Cross-Functional Collaboration</span><span>Social Media Planning</span><span>Social Media Scheduling</span></div>
+            </div>
+            <div class="tool-category">
+              <h4>Creative & Marketing Support</h4>
+              <div class="skill-tags"><span>Basic Graphic Design</span><span>Content Coordination</span><span>Brand Consistency</span><span>Campaign Support</span></div>
+            </div>
+          </div>
+          <div class="skill-group">
+            <h3>Technical Toolkit & Software</h3>
+            <div class="tool-category">
+              <h4>Project & Admin</h4>
+              <div class="skill-tags"><span>Asana</span><span>Trello</span><span>ClickUp</span><span>Calendly</span><span>Google Calendar</span><span>Google Drive</span><span>Outlook</span></div>
+            </div>
+            <div class="tool-category">
+              <h4>Office Suites</h4>
+              <div class="skill-tags"><span>Microsoft Word</span><span>Microsoft Excel</span><span>Microsoft PowerPoint</span><span>Google Docs</span><span>Google Sheets</span></div>
+            </div>
+            <div class="tool-category">
+              <h4>Media & Communication</h4>
+              <div class="skill-tags"><span>Canva</span><span>Slack</span><span>Zoom</span><span>Google Meet</span><span>Gmail</span></div>
+            </div>
+            <div class="tool-category">
+              <h4>CRM & Support Platforms</h4>
+              <div class="skill-tags"><span>Salesforce</span><span>Zendesk</span><span>ATS</span></div>
+            </div>
+            <div class="tool-category">
+              <h4>Social & Marketing</h4>
+              <div class="skill-tags"><span>Facebook</span><span>Instagram</span><span>TikTok</span><span>LinkedIn</span></div>
+            </div>
+            <div class="tool-category">
+              <h4>E-Commerce Platforms</h4>
+              <div class="skill-tags"><span>Amazon</span><span>Alibaba</span></div>
+            </div>
+            <p class="tool-note">Only include tools you have personally used and can confidently discuss with a client.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <div class="kicker">Working together</div>
+          <h2>A straightforward, dependable process.</h2>
+        </div>
+        <div class="process-grid">
+          <div class="process-step"><b>STEP 01</b><h3>Understand your workflow</h3><p>We review your daily tasks, tools, priorities, communication preferences, and business goals so the support fits your needs.</p></div>
+          <div class="process-step"><b>STEP 02</b><h3>Organize and execute</h3><p>I follow your process, maintain accurate records, and keep you informed with clear updates on progress, priorities, and blockers.</p></div>
+          <div class="process-step"><b>STEP 03</b><h3>Review and improve</h3><p>We assess what is working, identify opportunities to improve efficiency, and make practical adjustments that support smoother operations over time.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-soft" id="contact">
+      <div class="container">
+        <div class="section-head">
+          <div class="kicker">Let's connect</div>
+          <h2>Need reliable support for your online business?</h2>
+          <p>Tell me a little about your business and the tasks you need help with. I'll be happy to discuss how I can support your workflow.</p>
+        </div>
+        <div class="contact-wrap">
+          <div class="contact-card">
+            <h3>Let's make your day-to-day operations easier.</h3>
+            <p>Available for remote e-commerce support and virtual assistance for businesses in the USA, UK, and other markets.</p>
+            <div class="contact-detail"><span aria-hidden="true">✉</span><div><strong>Email</strong><span><a href="mailto:roedjayromero@gmail.com">roedjayromero@gmail.com</a></span></div></div>
+            <div class="contact-detail"><span aria-hidden="true">☎</span><div><strong>Mobile</strong><span><a href="https://wa.me/971581375341" target="_blank" rel="noopener noreferrer">+971 58 137 5341</a><br><a href="https://wa.me/639567269682" target="_blank" rel="noopener noreferrer">+63 956 726 9682</a></span></div></div>
+            <div class="contact-detail"><span aria-hidden="true">⌖</span><div><strong>Location</strong><span>Dubai, United Arab Emirates · Remote</span></div></div>
+            <div class="contact-detail"><span aria-hidden="true">◎</span><div><strong>LinkedIn</strong><span><a href="https://www.linkedin.com/in/roedjayromero" target="_blank" rel="noopener noreferrer">linkedin.com/in/roedjayromero</a></span></div></div>
+          </div>
+          <form class="contact-form" id="contactForm">
+            <div class="form-row">
+              <div class="field"><label for="name">Your name</label><input id="name" name="name" autocomplete="name" required placeholder="Jane Smith"></div>
+              <div class="field"><label for="email">Business email</label><input id="email" name="email" type="email" autocomplete="email" required placeholder="jane@company.com"></div>
+            </div>
+            <div class="field"><label for="company">Company or website (optional)</label><input id="company" name="company" placeholder="Your business name or website"></div>
+            <div class="field"><label for="service">What do you need help with?</label><select id="service" name="service" required><option value="">Select a service</option><option>Marketplace management</option><option>Product listing support</option><option>Customer support</option><option>Order monitoring</option><option>General virtual assistance</option><option>Sales and lead follow-up</option><option>Other / multiple services</option></select></div>
+            <div class="field"><label for="message">Project details</label><textarea id="message" name="message" required placeholder="Tell me about your business and the support you need..."></textarea></div>
+            <button class="btn btn-primary" type="submit">Prepare Email Inquiry <span aria-hidden="true">↗</span></button>
+            <p class="form-help">This starter form opens your email app with the details filled in. To receive submissions directly on a published site, connect a form service or use Wix's built-in form.</p>
+            <p class="form-help" id="formStatus" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> <strong>Roed Jay Romero</strong>. E-Commerce & Marketplace Virtual Assistance.</div>
+      <div class="footer-links"><a href="#home">Home</a><a href="#services">Services</a><a href="#contact">Contact</a><a class="backtop" href="#home">Back to top ↑</a></div>
+    </div>
+  </footer>
+
+  <script>
+    const toggle = document.getElementById('menuToggle');
+    const nav = document.getElementById('navLinks');
+    toggle.addEventListener('click', () => {
+      const open = nav.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.textContent = open ? '✕ Close' : '☰ Menu';
+    });
+    nav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      nav.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.textContent = '☰ Menu';
+    }));
+    document.getElementById('year').textContent = new Date().getFullYear();
+    document.getElementById('contactForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const data = new FormData(this);
+      const subject = encodeURIComponent('Portfolio inquiry: ' + data.get('service'));
+      const body = encodeURIComponent(
+        'Hello Roed Jay,\n\n' +
+        'My name: ' + data.get('name') + '\n' +
+        'Business email: ' + data.get('email') + '\n' +
+        'Company / website: ' + (data.get('company') || 'Not provided') + '\n' +
+        'Service needed: ' + data.get('service') + '\n\n' +
+        'Project details:\n' + data.get('message') + '\n\n' +
+        'Thank you.'
+      );
+      document.getElementById('formStatus').textContent = 'Your email app should open with the inquiry ready to send.';
+      window.location.href = 'mailto:roedjayromero@gmail.com?subject=' + subject + '&body=' + body;
+    });
+  </script>
+</body>
+</html>
